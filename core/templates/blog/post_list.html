@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>blog posts</h1>
+    {% for post in posts %}
+    <div>
+        <a href="{% url 'blog:post-detail' pk=post.id %}"><h2>{{post.id}} - {{post.title}}</h2></a>
+        <p>content: {{post.content}}</p>
+        <small>author: {{post.author}}</small>
+        <hr>
+        <a href="{% url 'blog:post-edit' pk=post.id %}">
+            <button>Edit</button>
+        </a>
+        <a href="{% url 'blog:post-delete' pk=post.id %}">
+            <button>Delete</button>
+        </a>
+        
+    
+    </div>
+    {% endfor %}
+    {% for contact in page_obj %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br>
+    ...
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</body>
+</html>
