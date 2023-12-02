@@ -9,6 +9,8 @@ from .models import Post
 from .forms import PostForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 # Create your views here.
 
 # Function Base View show a template
@@ -69,7 +71,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
 
 
-'''
+''' 
 class PostCreateView(FormView):
     template_name = 'contact.html'
     form_class = PostForm
