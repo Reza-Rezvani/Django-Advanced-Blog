@@ -1,12 +1,20 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly 
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    GenericAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 from rest_framework import mixins
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
@@ -45,7 +53,7 @@ def postDetail(request, id):
     elif request.method == "DELETE":
         post.delete()
         return Response({"detail":"Item removed successfully"}, status=status.HTTP_204_NO_CONTENT)"""
-    
+
 
 # Example for APIView in Class Based View
 '''class PostList(APIView):
@@ -114,9 +122,8 @@ def postDetail(request, id):
     queryset = Post.objects.filter(status=True)'''
 
 
-
 # Example for ViewSet CBV
-'''
+"""
 class PostViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
@@ -143,17 +150,22 @@ class PostViewSet(viewsets.ViewSet):
 
     def destroy(self, request, pk=None):
         pass
-'''    
+"""
+
 
 # Example for ModelViewSet CBV
 class PostModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = {'category':["exact","in"],'author':["exact"],'status':["exact"]}
-    search_fields = ['title', 'content']
-    ordering_fields = ['published_date']
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = {
+        "category": ["exact", "in"],
+        "author": ["exact"],
+        "status": ["exact"],
+    }
+    search_fields = ["title", "content"]
+    ordering_fields = ["published_date"]
     pagination_class = DefaultPagination
 
 
