@@ -11,3 +11,15 @@ exclude =
     settings.py,
     __init__,
 
+ignore =
+    E127,
+    F403,
+    F401,
+    E128,
+    E131,
+    E122,
+    E116,
+    W293,
+    E125,
+    E501,
+

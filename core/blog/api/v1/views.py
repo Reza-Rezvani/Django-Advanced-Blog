@@ -1,21 +1,22 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
+# from rest_framework.decorators import api_view, permission_classes
+# from rest_framework.response import Response
 from rest_framework.permissions import (
     IsAuthenticated,
-    IsAdminUser,
+    # IsAdminUser,
     IsAuthenticatedOrReadOnly,
 )
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
-from rest_framework import status
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.generics import (
-    GenericAPIView,
-    ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView,
-)
-from rest_framework import mixins
+
+# from rest_framework import status
+# from django.shortcuts import get_object_or_404
+# from rest_framework.views import APIView
+# from rest_framework.generics import (
+# GenericAPIView,
+# ListCreateAPIView,
+# RetrieveUpdateDestroyAPIView,
+# )
+# from rest_framework import mixins
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
@@ -52,7 +53,8 @@ def postDetail(request, id):
         return Response(serializer.data)
     elif request.method == "DELETE":
         post.delete()
-        return Response({"detail":"Item removed successfully"}, status=status.HTTP_204_NO_CONTENT)"""
+        return Response({"detail":"Item removed successfully"},
+        status=status.HTTP_204_NO_CONTENT)"""
 
 
 # Example for APIView in Class Based View
@@ -86,9 +88,9 @@ def postDetail(request, id):
         """ retrieving the post data """
         post = get_object_or_404(Post,pk=id,status=True)
         serializer = self.serializer_class(post)
-        return Response(serializer.data) 
+        return Response(serializer.data)
     
-    def put(self, request, id): 
+    def put(self, request, id):
         """ editing the post data"""
         post = get_object_or_404(Post,pk=id,status=True)
         serializer = PostSerializer(post, data=request.data)
@@ -101,7 +103,8 @@ def postDetail(request, id):
         """ deleting the post object """
         post = get_object_or_404(Post,pk=id,status=True)
         post.delete()
-        return Response({"detail":"Item removed successfully"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"detail":"Item removed successfully"},
+        status=status.HTTP_204_NO_CONTENT)
 '''
 
 # Example for GenericAPIView in Class Based View
