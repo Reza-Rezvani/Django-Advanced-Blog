@@ -11,6 +11,7 @@ drf-yasg[validation]
 djangorestframework-simplejwt
 djoser
 django-cors-headers
+
 # deployment modules
 
 # email third party modules
@@ -22,3 +23,8 @@ flake8
 pytest
 pytest-django
 Faker
+
+# background proccess and cache
+celery
+redis
+django-celery-beat
