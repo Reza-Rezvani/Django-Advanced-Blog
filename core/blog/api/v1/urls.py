@@ -20,3 +20,5 @@ urlpatterns = router.urls
 #       {'get':'retrieve','put':'update','patch':'partial_update',
 #       'delete':'destroy'}), name='post-detail'),
 # ]
+
+# urlpatterns += router.urls
